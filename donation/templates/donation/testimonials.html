@@ -1,0 +1,47 @@
+{% extends 'donation/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">Testimonials</h3>
+            </div>
+            <div class="card-body">
+                {% for testimonial in testimonials %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>{{ testimonial.message }}</p>
+                            <footer class="blockquote-footer">{{ testimonial.user.username }} on <cite>{{ testimonial.date_posted|date:"Y-m-d" }}</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        {% if user.is_authenticated %}
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">Submit Your Testimonial</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="form-group mt-3">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info">
+            <a href="{% url 'login' %}">Login</a> to submit your testimonial.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

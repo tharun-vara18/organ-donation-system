@@ -1,0 +1,33 @@
+{% extends 'donation/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">Request an Organ</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="donor">Select Donor</label>
+                        <select name="donor" class="form-select" required>
+                            {% for donor in donors %}
+                            <option value="{{ donor.id }}">
+                                {{ donor.full_name }} - {{ donor.organ_to_donate }} ({{ donor.blood_type }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {{ form|crispy }}
+                    <div class="form-group mt-3">
+                        <button class="btn btn-success" type="submit">Submit Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

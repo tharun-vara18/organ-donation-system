@@ -1,0 +1,35 @@
+{% extends 'donation/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="card-title mb-0">Organ Donation Awareness</h2>
+            </div>
+            <div class="card-body">
+                <p>Organ donation is the process of donating organs to save or improve someone's life. Here are some key facts about organ donation:</p>
+                
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item">One organ donor can save up to 8 lives.</li>
+                    <li class="list-group-item">Organs that can be donated include the heart, liver, kidneys, lungs, pancreas, and corneas.</li>
+                    <li class="list-group-item">Anyone, regardless of age or medical history, can become an organ donor.</li>
+                    <li class="list-group-item">Organ donation helps reduce waiting times for critical transplants.</li>
+                </ul>
+                
+                {% if user.is_authenticated %}
+                    {% if not user.is_donor %}
+                        <div class="text-center">
+                            <a href="{% url 'register_donor' %}" class="btn btn-danger">Become a Donor</a>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center">
+                        <a href="{% url 'register' %}" class="btn btn-danger">Register to Become a Donor</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
