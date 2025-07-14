@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 SECRET_KEY = 'django-insecure-9o5_-4mdzdi6ypmo!7p#k9$)&vkty)iz8)f_3^%g*_drz%h3k6'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
 
 # Application definition
 INSTALLED_APPS = [
@@ -93,7 +93,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files
 MEDIA_URL = '/media/'
